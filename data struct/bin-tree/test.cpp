@@ -208,17 +208,10 @@ int Out_Degree(BinaryTree T){
             return 0;
         else if(T->Rchild&&T->Lchild)
             return 2;
-        else if(!T->Lchild&&T->Rchild){
-            if(Out_Degree(T->Rchild)>1)
-                return 2;
-            else
-                return 1;
-        }else if(T->Lchild&&!T->Rchild){
-            if(Out_Degree(T->Lchild)>1)
-                return 2;
-            else
-                return 1;
-        }
+        else if(!T->Lchild&&T->Rchild)
+            return (Out_Degree(T->Rchild) > 1) ? 2 : 1;
+        else if(T->Lchild&&!T->Rchild)
+            return (Out_Degree(T->Lchild) > 1) ? 2 : 1;
     }
     return 0;
 }
