@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-
+//统计字符用的结构
 struct ch_num{
     char cha;
     int count=0;
