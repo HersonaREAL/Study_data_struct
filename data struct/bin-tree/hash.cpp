@@ -9,6 +9,7 @@ struct ch_num{
 //哈夫曼节点结构
 typedef struct TreeNode *HuffTree;
 struct TreeNode{
+    char ch;
     int weight;
     int parent,lchild,rchild;
 }HTNode,*HuffmanTree;
@@ -74,6 +75,7 @@ void CreatHuffTree(HuffTree &HT, ch_num *char_sum_array,int len){
     printf("-------------------------初态------------------------------\n节点     weight     parent     lchiled     rchild\n");
     //输入权值
     for (int i = 1; i <= len;i++){
+        HT[i].ch = char_sum_array[i - 1].cha;
         HT[i].weight = char_sum_array[i - 1].count;
         printf("%-11d%-11d%-11d%-11d%-11d\n", i, HuffmanTree[i].weight, HuffmanTree[i].parent, HuffmanTree[i].lchild, HuffmanTree[i].rchild);
     }
@@ -107,6 +109,8 @@ void CreatHuffTree(HuffTree &HT, ch_num *char_sum_array,int len){
             HT[s1].parent = HT[s2].parent = i;
             HT[i].lchild = s1;
             HT[i].rchild = s2;
+            
+            //得到新的节点
             HT[i].weight = HT[s1].weight + HT[s2].weight;
     }
 }
