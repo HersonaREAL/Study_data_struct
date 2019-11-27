@@ -1,3 +1,9 @@
+/*
+4.	构造哈夫曼树和哈夫曼编码的算法实现
+   统计下面一段英文的不同字符个数和每个字符的出现频率，利用统计数据构造构造哈夫曼树和哈夫曼编码
+The Chinese official said he viewed the Trump Presidency not as an aberration but as the product of a failing political system. This jibes with other accounts. The Chinese leadership believes that the United States, and Western democracies in general, haven't risen to the challenge of a globalized economy, which necessitates big changes in production patterns, as well as major upgrades in education and public infrastructure. In Trump and Trumpism, the Chinese see an inevitable backlash to this failure.
+
+*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -26,7 +32,7 @@ ch_num *huffsum;
 
 void CreatHuffTree(HuffTree &HT, ch_num *char_sum_array,int len);
 void CreatHuffmanCode(HuffTree HT, HuffmanCode &HC, int len);
-int sum_char(ch_num *charsum, char *str);
+int sum_char(ch_num *charsum, char *str);//统计字符出现次数
 ch_num *creat_sum_array(ch_num *huff, int len);//huff用的结构数组
 void PrintHuffmanTree(int len);
 void PrintHuffmanCode(int len);
