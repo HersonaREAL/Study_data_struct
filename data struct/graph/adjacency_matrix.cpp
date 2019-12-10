@@ -70,9 +70,9 @@ void PrintUDN(AM_Graph G){
     for (int i = 0; i < G.vexnum;i++)
         for (int j = 0; j < G.vexnum;j++){
             if(j==G.vexnum-1)
-                printf("%-3d\n", G.matrix[i][j]);
+                printf("%-10d\n", G.matrix[i][j]);
             else
-                printf("%-3d ", G.matrix[i][j]);
+                printf("%-10d ", G.matrix[i][j]);
         }
 
 }
