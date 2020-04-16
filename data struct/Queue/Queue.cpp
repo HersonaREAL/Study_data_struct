@@ -102,19 +102,12 @@ bool IsEmpty(Queue Q){
 }
 
 void EnQueue(int x,Queue Q){
-    if(IsEmpty(Q)){
-        PtrNode TmpNode = (PtrNode)malloc(sizeof(Node));
-        TmpNode->Data = x;
-        TmpNode->Next = NULL;
+    PtrNode TmpNode = (PtrNode)malloc(sizeof(Node));
+    TmpNode->Data = x;
+    TmpNode->Next = NULL;
+    Q->Rear = TmpNode;
+    if(IsEmpty(Q))
         Q->Front = TmpNode;//此时头和尾同时指向一个节点
-        Q->Rear = TmpNode;
-    }else{
-        PtrNode TmpNode = (PtrNode)malloc(sizeof(Node));
-        TmpNode->Data = x;
-        TmpNode->Next = NULL;
-        Q->Rear->Next = TmpNode;//此时只需要移动尾部即可
-        Q->Rear = TmpNode;
-    }
     printf("入队元素:%d\n", x);
 }
 
