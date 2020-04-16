@@ -102,13 +102,13 @@ bool IsEmpty(Queue Q){
 }
 
 void EnQueue(int x,Queue Q){
-    PtrNode TmpNode = (PtrNode)malloc(sizeof(Node));
+    PtrNode TmpNode = (PtrNode)malloc(sizeof(struct Node));
     TmpNode->Data = x;
     TmpNode->Next = NULL;
-    Q->Rear = TmpNode;
     if(IsEmpty(Q))
-        Q->Front = TmpNode;//此时头和尾同时指向一个节点
-    printf("入队元素:%d\n", x);
+        Q->Front = Q->Rear=TmpNode;//此时头和尾同时指向一个节点
+    else 
+        Q->Rear= Q->Rear->Next=TmpNode;
 }
 
 void DeQueue(Queue Q){
