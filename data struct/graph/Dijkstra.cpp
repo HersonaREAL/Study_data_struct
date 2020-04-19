@@ -1,12 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
-//Í¼
-#define MaxInt 2147483647 //64Î»ÏµÍ³int×î´óÖµ
-#define MVNum 15 //×î´ó¶¥µãÊı
+//å›¾
+#define MaxInt 2147483647 //64ä½ç³»ç»Ÿintæœ€å¤§å€¼
+#define MVNum 15 //æœ€å¤§é¡¶ç‚¹æ•°
 struct AM_Graph{
-    int vexs[MVNum];//¶¥µã±í
-    int matrix[MVNum][MVNum];//ÁÚ½Ó¾ØÕó
-    int vexnum, arcnum;//Í¼µÄµãÊıºÍ±ßÊı
+    int vexs[MVNum];//é¡¶ç‚¹è¡¨
+    int matrix[MVNum][MVNum];//é‚»æ¥çŸ©é˜µ
+    int vexnum, arcnum;//å›¾çš„ç‚¹æ•°å’Œè¾¹æ•°
 };
 bool CreateUDN(AM_Graph &G);
 int LocateVex(AM_Graph G, int v);
@@ -14,9 +14,9 @@ void PrintUDN(AM_Graph G);
 
 //Dijkstra
 struct PATH {
-    bool S[MVNum];//ÅĞ¶Ïvexs[i]ÊÇ·ñÒÑ¾­µÃµ½×î¶ÌÂ·¾¶
-    int Path[MVNum];//Ä³µãµÄÇ°Çı½áµã£¬¿ÉÒ»Ö±»ØËİÔ´µã
-    int D[MVNum];//V0->ViÖ®¼äÂ·¾¶³¤
+    bool S[MVNum];//åˆ¤æ–­vexs[i]æ˜¯å¦å·²ç»å¾—åˆ°æœ€çŸ­è·¯å¾„
+    int Path[MVNum];//æŸç‚¹çš„å‰é©±ç»“ç‚¹ï¼Œå¯ä¸€ç›´å›æº¯æºç‚¹
+    int D[MVNum];//V0->Viä¹‹é—´è·¯å¾„é•¿
 }About_Path;
 void shortestpath(AM_Graph G, int v, PATH &About_PATH);
 void PrintPath(AM_Graph G,PATH About_Path);
@@ -26,7 +26,7 @@ int main(void){
     int tmp;
     if(CreateUDN(G))
         PrintUDN(G);
-    printf("Ñ¡ÔñÒ»¸öµãÇóµ½¸÷µãµÄ×î¶ÌÂ·¾¶\n");
+    printf("é€‰æ‹©ä¸€ä¸ªç‚¹æ±‚åˆ°å„ç‚¹çš„æœ€çŸ­è·¯å¾„\n");
     scanf("%d", &tmp);
     shortestpath(G, tmp,About_Path);
     PrintPath(G, About_Path);
@@ -37,29 +37,29 @@ int main(void){
 
 bool CreateUDN(AM_Graph &G){
     int v1_tmp, v2_tmp,w;
-    printf("ÊäÈëÍ¼µÄ¶¥µã¸öÊı£¬±ßÊı\n");
+    printf("è¾“å…¥å›¾çš„é¡¶ç‚¹ä¸ªæ•°ï¼Œè¾¹æ•°\n");
     scanf("%d%d", &G.vexnum, &G.arcnum);
     if(G.vexnum>15){
-        printf("´´½¨Ê§°Ü\n");
+        printf("åˆ›å»ºå¤±è´¥\n");
         return false;
     }
     
-    //³õÊ¼»¯¶¥µã±í
-    printf("ÊäÈë%d¸öµãµÄĞÅÏ¢\n",G.vexnum);
+    //åˆå§‹åŒ–é¡¶ç‚¹è¡¨
+    printf("è¾“å…¥%dä¸ªç‚¹çš„ä¿¡æ¯\n",G.vexnum);
     for (int i = 0; i < G.vexnum;i++)
         scanf("%d", &G.vexs[i]);
 
-    //¾ØÕó³õÊ¼»¯
+    //çŸ©é˜µåˆå§‹åŒ–
     for (int i = 0; i < MVNum; i++)
         for (int j = 0; j < MVNum; j++)
             G.matrix[i][j] = MaxInt;
 
-    //¿ªÊ¼ÊäÈë
-    printf("ÊäÈë±ßµÄÈ¨ºÍÏàÁÚµÄµã,¹²ÊäÈë%d´Î\n", G.arcnum);
+    //å¼€å§‹è¾“å…¥
+    printf("è¾“å…¥è¾¹çš„æƒå’Œç›¸é‚»çš„ç‚¹,å…±è¾“å…¥%dæ¬¡\n", G.arcnum);
     for (int i = 0; i < G.arcnum;i++){
         scanf("%d%d%d", &w, &v1_tmp, &v2_tmp);
         if((LocateVex(G, v1_tmp)==-1)||(LocateVex(G, v2_tmp)==-1)){
-            printf("ÊäÈëµÄµã²»´æÔÚ£¬ÁÚ½Ó±í´´½¨Ê§°Ü\n");
+            printf("è¾“å…¥çš„ç‚¹ä¸å­˜åœ¨ï¼Œé‚»æ¥è¡¨åˆ›å»ºå¤±è´¥\n");
             return false;
         }
 
@@ -88,34 +88,34 @@ void PrintUDN(AM_Graph G){
 }
 
 void shortestpath(AM_Graph G, int v,PATH &About_Path){
-    //¶¥µã³õÊ¼»¯
+    //é¡¶ç‚¹åˆå§‹åŒ–
     int v_i = LocateVex(G, v);
     for (int i = 0; i < G.vexnum;i++){
         About_Path.D[i] = G.matrix[v_i][i];
         if(About_Path.D[i]<MaxInt)
-            About_Path.Path[i] = v;
+            About_Path.Path[i] = v_i;
         else
             About_Path.Path[i] = -1;
     }
-    About_Path.S[v_i] = true;//°Ñv²¢ÈëS¼¯
+    About_Path.S[v_i] = true;//æŠŠvå¹¶å…¥Sé›†
     About_Path.D[v_i] = 0;
-    //³õÊ¼»¯½áÊø
+    //åˆå§‹åŒ–ç»“æŸ
 
-    //¿ªÊ¼Ñ°Â·
+    //å¼€å§‹å¯»è·¯
     for (int n = 1; n < G.vexnum;n++){
         int tmp_min = MaxInt;
 
-        //Ñ¡ÔñÒ»Ìõµ½V-S¼¯µÄµ±Ç°µÄ×î¶ÌÂ·¾¶
+        //é€‰æ‹©ä¸€æ¡åˆ°V-Sé›†çš„å½“å‰çš„æœ€çŸ­è·¯å¾„
         for (int i = 0; i < G.vexnum;i++)
             if(!About_Path.S[i]&&About_Path.D[i]<tmp_min){
                 v_i = i;
                 tmp_min = About_Path.D[i];
             }
-        About_Path.S[v_i] = true;//½«´ËÊ±µÄVi¼ÓÈëS¼¯ºÏ
+        About_Path.S[v_i] = true;//å°†æ­¤æ—¶çš„ViåŠ å…¥Sé›†åˆ
 
-        //¸üĞÂvo³ö·¢µ½V-SµãµÄ×î¶ÌÂ·¾¶
+        //æ›´æ–°voå‡ºå‘åˆ°V-Sç‚¹çš„æœ€çŸ­è·¯å¾„
         for (int i = 0; i < G.vexnum;i++)
-            //ÅĞ¶ÏÊÇ·ñµ±Ç°×î¶ÌÂ·¾¶+È¨Ğ¡ÓÚÖ®Ç°µÄÂ·¾¶,(About_Path.D[v_i]+G.matrix[v_i][i])>0·ÀÖ¹Òç³ö±ä¸ºÓ°ÏìÅĞ¶Ï
+            //åˆ¤æ–­æ˜¯å¦å½“å‰æœ€çŸ­è·¯å¾„+æƒå°äºä¹‹å‰çš„è·¯å¾„,(About_Path.D[v_i]+G.matrix[v_i][i])>0é˜²æ­¢æº¢å‡ºå˜è´Ÿå½±å“åˆ¤æ–­
             if(!About_Path.S[i]&&((About_Path.D[v_i]+G.matrix[v_i][i])<About_Path.D[i])&&(About_Path.D[v_i]+G.matrix[v_i][i])>0){
                 About_Path.D[i] = About_Path.D[v_i] + G.matrix[v_i][i];
                 About_Path.Path[i] = v_i;
@@ -127,7 +127,7 @@ void shortestpath(AM_Graph G, int v,PATH &About_Path){
 void PrintPath(AM_Graph G,PATH About_Path){
     for (int i = 0; i < G.vexnum;i++){
         int k = i;
-        printf("È¨Îª%d\n",About_Path.D[i]);
+        printf("æƒä¸º%d\n",About_Path.D[i]);
         printf("%d", G.vexs[k]);
         while(About_Path.Path[k]!=-1){
             printf("<-- %d", G.vexs[About_Path.Path[k]]);
