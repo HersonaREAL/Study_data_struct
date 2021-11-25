@@ -53,7 +53,7 @@ priority = 8
 KERNEL_STACK = 12/*汇编硬编码需要*/
 signal	= 16
 sigaction = 20		# MUST be 16 (=len of sigaction)
-blocked = (33*16+4)/*需要+4*/
+blocked = (33*16+4)/*需要+4 多出来的kernelstack为四个字节*/
 
 # offsets within sigaction
 sa_handler = 0
